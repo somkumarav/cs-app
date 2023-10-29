@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-color: #847869;
+    --secondary-color: #fae1c3;
+
+    --primary-background-color: #1d1d1d;
+    --secondary-background-color: #272727;
+    --accent-color: #91170c;
+
+    --robotoMono: "Roboto Mono", monospace;
+    --barlow: "Barlow", sans-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
