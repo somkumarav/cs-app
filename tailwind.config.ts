@@ -15,7 +15,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        // sans: ["var(--font-sans)", ...fontFamily.sans],
+        barlow: "var(--barlow)",
+        robotoMono: "var(--roboto-mono)",
+        monoton: "var(--monoton)",
       },
       textColor: {
         skin: {
