@@ -24,7 +24,9 @@ export const useTimer = () =>
       }, 1);
     };
     const resetTimer = () => {
-      clearInterval(increment.current as NodeJS.Timeout);
+      if (increment.current) {
+        clearInterval(increment.current);
+      }
       setTimer(0);
       setMyState(0);
     };
@@ -35,7 +37,9 @@ export const useTimer = () =>
           if (e.code === "Space" && myState === 1) {
             // STOP
             e.preventDefault();
-            clearInterval(increment.current as NodeJS.Timeout);
+            if (increment.current) {
+              clearInterval(increment.current);
+            }
             setMyState(2);
             // refreshScramble();
             const id = new Date();
