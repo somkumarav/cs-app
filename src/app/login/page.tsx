@@ -5,11 +5,10 @@ import { Input } from "../_components/ui/Input";
 import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
-  console.log(process.env.NEXTAUTH_URL);
   return (
     <div className="bg-skin-base min-h-screen">
       <div className="container flex h-screen items-center justify-center">
-        <div className="text-skin-secondaryColor flex flex-col">
+        <div className="flex flex-col text-skin-secondaryColor">
           Login
           <Input name="email" className="mb-2" />
           <Input name="password" className="mb-2" />

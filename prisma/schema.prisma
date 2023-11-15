@@ -62,6 +62,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    Solves        Solves[]
 }
 
 model VerificationToken {
@@ -70,4 +71,17 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Solves {
+    id        Int      @id @default(autoincrement())
+    scramble  String[]
+    puzzle    String
+    time      Int
+    userId    String
+    User      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([userId])
 }

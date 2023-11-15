@@ -10,7 +10,7 @@ export const TextVariants = cva("", {
     textSize: {
       paragraph: "text",
       heading: "text-xl",
-      timer: "text-6xl ",
+      timer: "text-6xl font-robotoMono font-semibold tracking-wider",
       scramble: "text-2xl tracking-wider text-center",
     },
   },
