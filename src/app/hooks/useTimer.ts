@@ -1,18 +1,38 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { api } from "../../trpc/react";
 
-export const useTimer = () =>
+type TProps = {
+  refreshScramble: () => void;
+  cube: string;
+  // addSolve: (puzzle: string,) => void;
+  // addSolve: (puzzle: string, scramble: string[], time: number) => Promise<void>;
+  scramble: string[];
+};
+
+export const useTimer = ({ refreshScramble, cube, scramble }: TProps) =>
   // refreshScramble: () => void,
   // addSolve: (solve: Solve) => void,
   // cube: string,
   // scramble: string[],
   {
+    const { mutate: createSolve } = api.solve.create.useMutation({});
     const [timer, setTimer] = useState<number>(0);
     const [myState, setMyState] = useState<number>(0);
     const [isFired, setIsFired] = useState<boolean>(false); // This state denotes is the timer running or not
     const [prevId, setPrevId] = useState<number>(0);
     const increment = useRef<NodeJS.Timeout | null>(null);
+
+    // const addSolve = async (
+    //   puzzle: string,
+    //   scrambel: string[],
+    //   time: number,
+    // ) => {
+    //   await createSolve({ puzzle, scramble, time });
+    // };
+
+    // const { mutate: addSolve } = api.solve.create;
 
     const startTimer = () => {
       const first = Date.now() - 10;
@@ -41,7 +61,7 @@ export const useTimer = () =>
               clearInterval(increment.current);
             }
             setMyState(2);
-            // refreshScramble();
+            refreshScramble();
             const id = new Date();
             setPrevId(id.getTime());
             // const newSolve = {
@@ -52,7 +72,8 @@ export const useTimer = () =>
             //   date: `${id.getUTCDate()}-${id.getMonth()}-${id.getFullYear()}`,
             //   comment: "",
             // };
-            // addSolve(newSolve);
+            createSolve({ puzzle: cube, scramble, time: timer });
+            // addSolve(cube, scramble, timer).catch().then();
           }
           if (e.code === "Space" && myState === 2) {
             // RESET
@@ -84,9 +105,10 @@ export const useTimer = () =>
       isFired,
       myState,
       // addSolve,
-      // cube,
-      // refreshScramble,
-      // scramble,
+      createSolve,
+      cube,
+      refreshScramble,
+      scramble,
       timer,
     ]);
 

@@ -4,21 +4,27 @@ import { scrambles2x2, scrambles3x3, scrambles4x4 } from "../../utils/cubes";
 type GenerateNewScramble = ({ cube }: { cube: string }) => string[];
 type CreateScramble = ({}: { limit: number; scrambles: string[] }) => string[];
 
-const createScramble: CreateScramble = ({ limit, scrambles }) => {
+const createScramble: CreateScramble = ({
+  limit,
+  scrambles,
+}: {
+  limit: number;
+  scrambles: string[];
+}) => {
   // Problems with scrambel
   // L L'
 
-  let newScramble: string[] = [];
+  const newScramble: string[] = [];
   let previous;
   for (let i = 0; i < limit; i++) {
     const random = Math.floor(Math.random() * scrambles.length);
     const current = scrambles[random];
     if (previous && previous === current) {
-      newScramble.push(scrambles[random + 1] as string);
+      newScramble.push(scrambles[random + random]!);
       previous = scrambles[random + 1];
     } else {
       previous = current;
-      newScramble.push(current as string);
+      newScramble.push(current!);
     }
   }
   // if (newScramble.length !== 0) return newScramble;
