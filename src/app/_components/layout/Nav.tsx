@@ -10,6 +10,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 type Route = {
   name: string;
@@ -51,8 +52,10 @@ export const Nav = () => {
           name: "User",
           link: "/user",
           icon: (
-            <img
+            <Image
               src={session.user.image}
+              width={20}
+              height={20}
               alt=""
               className="h-[20px] w-[20px] rounded-full"
             />
