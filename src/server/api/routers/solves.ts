@@ -1,20 +1,8 @@
 import { z } from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const solvesRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   create: protectedProcedure
     .input(
       z.object({
@@ -30,7 +18,7 @@ export const solvesRouter = createTRPCRouter({
 
         const solve = await db.solves.create({
           data: {
-            userId: session?.user.id,
+            userId: session.user.id,
             puzzle,
             scramble,
             time,
@@ -44,11 +32,13 @@ export const solvesRouter = createTRPCRouter({
       }
     }),
 
-  getLatest: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.post.findFirst({
+  getLast5Solves: protectedProcedure.query(async ({ ctx }) => {
+    const data = await ctx.db.solves.findMany({
+      take: 5,
+      where: { userId: ctx.session.user.id },
       orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
     });
+    return data;
   }),
 
   getSecretMessage: protectedProcedure.query(() => {

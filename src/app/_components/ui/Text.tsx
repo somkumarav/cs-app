@@ -8,7 +8,7 @@ export const TextVariants = cva("", {
       secondary: "text-skin-secondaryColor",
     },
     textSize: {
-      paragraph: "text",
+      paragraph: "text-sm",
       heading: "text-xl",
       timer: "text-6xl font-robotoMono font-semibold tracking-wider",
       scramble: "text-2xl tracking-wider text-center",

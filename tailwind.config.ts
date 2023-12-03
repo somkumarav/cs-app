@@ -1,5 +1,4 @@
 import { type Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 // function withOpacity(variableName: string): string {
 //   return ({ opacityValue }: { opacityValue: number | undefined }): string => {

@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { ButtonHTMLAttributes } from "react";
+import { type ButtonHTMLAttributes } from "react";
 import { cn } from "../../../utils/cn";
 
 export const ButtonVariants = cva("rounded-md px-2 outline-none opacity-95", {
