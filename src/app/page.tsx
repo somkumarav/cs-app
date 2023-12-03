@@ -5,6 +5,7 @@ import { MainLayout } from "./_components/layout/MainLayout";
 import { Text } from "./_components/ui/Text";
 import { useScramble } from "./hooks/useScramble";
 import { useTimer } from "./hooks/useTimer";
+import { LastFiveSolveShowCase } from "./_components/LastFiveSolveShowCase";
 
 export default function Home() {
   const [cube, setCube] = useState<string>("3x3");
@@ -28,7 +29,9 @@ export default function Home() {
           {format()}
         </Text>
       </div>
-      <div className="h-[10vh"></div>
+      <div className="flex h-[10vh] items-center justify-center">
+        <LastFiveSolveShowCase />
+      </div>
     </MainLayout>
   );
 }
