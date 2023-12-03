@@ -1,5 +1,5 @@
-import { VariantProps, cva } from "class-variance-authority";
-import { InputHTMLAttributes } from "react";
+import { type VariantProps, cva } from "class-variance-authority";
+import { type InputHTMLAttributes } from "react";
 import { cn } from "../../../utils/cn";
 
 export const InputVariants = cva("rounded-md px-2 outline-none opacity-95", {
