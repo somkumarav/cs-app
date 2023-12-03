@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { api } from "../../trpc/react";
-import { Solves } from "@prisma/client";
 
 type TProps = {
   refreshScramble: () => void;
@@ -18,8 +17,6 @@ export const useTimer = ({ refreshScramble, cube, scramble }: TProps) =>
   // cube: string,
   // scramble: string[],
   {
-    const utils = api.useUtils();
-
     const { mutate: createSolve } = api.solve.create.useMutation({
       onSuccess: (data) => {
         console.log("data---->", data);
@@ -57,7 +54,7 @@ export const useTimer = ({ refreshScramble, cube, scramble }: TProps) =>
       if (increment.current) {
         clearInterval(increment.current);
       }
-      setTimer(0);
+      // setTimer(0);
       setMyState(0);
     };
 
@@ -71,19 +68,15 @@ export const useTimer = ({ refreshScramble, cube, scramble }: TProps) =>
               clearInterval(increment.current);
             }
             setMyState(2);
-            refreshScramble();
             const id = new Date();
             setPrevId(id.getTime());
-            // const newSolve = {
-            //   id: id.getTime(),
-            //   time: timer,
-            //   scramble: scramble,
-            //   cube: cube,
-            //   date: `${id.getUTCDate()}-${id.getMonth()}-${id.getFullYear()}`,
-            //   comment: "",
-            // };
-            console.log(scramble);
-            createSolve({ puzzle: cube, scramble, time: timer });
+            const newSolve = {
+              scramble: scramble,
+              puzzle: cube,
+              time: timer,
+            };
+            createSolve(newSolve);
+            refreshScramble();
             // addSolve(cube, scramble, timer).catch().then();
           }
           if (e.code === "Space" && myState === 2) {

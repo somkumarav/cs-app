@@ -15,7 +15,6 @@ export const solvesRouter = createTRPCRouter({
       try {
         const { session, db } = ctx;
         const { puzzle, scramble, time } = input;
-        console.log("user----->", session);
 
         const solve = await db.solves.create({
           data: {
