@@ -34,12 +34,13 @@ export const authOptions: NextAuthOptions = {
         id: token.uid,
       },
     }),
-    redirect: ({ url, baseUrl }) => {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
+    redirect: ({ baseUrl }) => {
       return baseUrl;
+      // // Allows relative callback URLs
+      // if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // // Allows callback URLs on the same origin
+      // else if (new URL(url).origin === baseUrl) return url;
+      // return baseUrl;
     },
     jwt: ({ user, token }) => {
       if (user) {
