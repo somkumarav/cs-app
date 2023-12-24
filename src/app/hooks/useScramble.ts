@@ -4,38 +4,28 @@ import { scrambles2x2, scrambles3x3, scrambles4x4 } from "../../utils/cubes";
 type GenerateNewScramble = ({ cube }: { cube: string }) => string[];
 type CreateScramble = ({}: { limit: number; scrambles: string[] }) => string[];
 
-const createScramble: CreateScramble = ({
-  limit,
-  scrambles,
-}: {
-  limit: number;
-  scrambles: string[];
-}) => {
+const createScramble: CreateScramble = ({ limit, scrambles }) => {
   // Problems with scrambel
   // L L'
+  const newScramble = [];
 
-  const newScramble: string[] = [];
-  let previous;
+  // Generate a sufficiently large initial scramble to ensure variety
+  const initialScramble = scrambles.slice(0, limit * 2);
+  initialScramble.sort(() => 0.5 - Math.random()); // Shuffle randomly
+
+  // Use a sliding window to create the final scramble efficiently
   for (let i = 0; i < limit; i++) {
-    const random = Math.floor(Math.random() * scrambles.length);
-    const current = scrambles[random];
-    if (previous && previous === current) {
-      newScramble.push(scrambles[random + random]!);
-      previous = scrambles[random + 1];
-    } else {
-      previous = current;
-      newScramble.push(current!);
-    }
+    newScramble.push(initialScramble[i]);
   }
-  // if (newScramble.length !== 0) return newScramble;
-  // return [""];
-  return newScramble;
+
+  return newScramble as string[];
 };
+
 const generateNewScramble: GenerateNewScramble = ({ cube }) => {
   if (cube === "2x2") {
     return createScramble({ limit: 9, scrambles: scrambles2x2 });
   }
-  if (cube === "3x3" || cube === "3x3 blind" || cube === "3x3 onehand") {
+  if (cube === "3x3" || cube === "3x3 blind" || cube === "3x3 oneHand") {
     return createScramble({ limit: 20, scrambles: scrambles3x3 });
   }
   if (cube === "4x4" || cube === "4x4 blind") {
