@@ -5,7 +5,7 @@ type GenerateNewScramble = ({ cube }: { cube: string }) => string[];
 type CreateScramble = ({}: { limit: number; scrambles: string[] }) => string[];
 
 const createScramble: CreateScramble = ({ limit, scrambles }) => {
-  // Problems with scrambel
+  // Problems with scramble
   // L L'
   const newScramble = [];
 
