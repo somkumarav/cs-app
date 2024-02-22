@@ -4,6 +4,9 @@ import Moment from "moment";
 
 export const LastFiveSolveShowCase = () => {
   const { data: last5Solves, isLoading } = api.solve.getLast5Solves.useQuery();
+
+  if (isLoading || !!!last5Solves?.length) return null;
+
   return (
     <div className=" flex h-[35px] w-[80%] items-center justify-around rounded-md bg-skin-secondaryBg">
       {last5Solves?.map((solve) => {
